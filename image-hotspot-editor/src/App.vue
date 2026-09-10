@@ -167,29 +167,90 @@
         </div>
         <div class="form-item">
           <label>图片模式</label>
-          <a-radio-group v-model="exportImgMode" type="button">
-            <a-radio value="external">外链图片</a-radio>
-            <a-radio value="base64">Base64 内嵌</a-radio>
-          </a-radio-group>
-          <div class="form-tip">
-            外链模式文件更小，但需要图片可网络访问；Base64 模式完全离线可用，文件较大
+          <div class="option-cards">
+            <div
+              class="option-card"
+              :class="{ active: exportImgMode === 'external' }"
+              @click="exportImgMode = 'external'"
+            >
+              <div class="option-card-icon">🌐</div>
+              <div class="option-card-text">
+                <div class="option-card-title">外链图片</div>
+                <div class="option-card-desc">文件体积小</div>
+              </div>
+              <div v-if="exportImgMode === 'external'" class="option-card-check">✓</div>
+            </div>
+            <div
+              class="option-card"
+              :class="{ active: exportImgMode === 'base64' }"
+              @click="exportImgMode = 'base64'"
+            >
+              <div class="option-card-icon">📦</div>
+              <div class="option-card-text">
+                <div class="option-card-title">Base64 内嵌</div>
+                <div class="option-card-desc">完全离线可用</div>
+              </div>
+              <div v-if="exportImgMode === 'base64'" class="option-card-check">✓</div>
+            </div>
           </div>
         </div>
         <div class="form-item">
           <label>热区样式</label>
-          <a-radio-group v-model="exportAreaStyle" type="button">
-            <a-radio value="hidden">隐藏边框</a-radio>
-            <a-radio value="border">显示边框</a-radio>
-          </a-radio-group>
-          <div class="form-tip">成品页中热区是否显示虚线边框</div>
+          <div class="option-cards">
+            <div
+              class="option-card"
+              :class="{ active: exportAreaStyle === 'hidden' }"
+              @click="exportAreaStyle = 'hidden'"
+            >
+              <div class="option-card-icon">👻</div>
+              <div class="option-card-text">
+                <div class="option-card-title">隐藏边框</div>
+                <div class="option-card-desc">仅点击区域</div>
+              </div>
+              <div v-if="exportAreaStyle === 'hidden'" class="option-card-check">✓</div>
+            </div>
+            <div
+              class="option-card"
+              :class="{ active: exportAreaStyle === 'border' }"
+              @click="exportAreaStyle = 'border'"
+            >
+              <div class="option-card-icon">🟦</div>
+              <div class="option-card-text">
+                <div class="option-card-title">显示边框</div>
+                <div class="option-card-desc">虚线边框可见</div>
+              </div>
+              <div v-if="exportAreaStyle === 'border'" class="option-card-check">✓</div>
+            </div>
+          </div>
         </div>
         <div class="form-item">
           <label>布局方式</label>
-          <a-radio-group v-model="exportLayout" type="button">
-            <a-radio value="vertical">垂直排列</a-radio>
-            <a-radio value="horizontal">水平排列</a-radio>
-          </a-radio-group>
-          <div class="form-tip">多张图片时的排列方式</div>
+          <div class="option-cards">
+            <div
+              class="option-card"
+              :class="{ active: exportLayout === 'vertical' }"
+              @click="exportLayout = 'vertical'"
+            >
+              <div class="option-card-icon">📱</div>
+              <div class="option-card-text">
+                <div class="option-card-title">垂直排列</div>
+                <div class="option-card-desc">上下堆叠</div>
+              </div>
+              <div v-if="exportLayout === 'vertical'" class="option-card-check">✓</div>
+            </div>
+            <div
+              class="option-card"
+              :class="{ active: exportLayout === 'horizontal' }"
+              @click="exportLayout = 'horizontal'"
+            >
+              <div class="option-card-icon">🖼️</div>
+              <div class="option-card-text">
+                <div class="option-card-title">水平排列</div>
+                <div class="option-card-desc">左右并排</div>
+              </div>
+              <div v-if="exportLayout === 'horizontal'" class="option-card-check">✓</div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="export-footer">
@@ -992,7 +1053,7 @@ const doExport = async () => {
 .form-item {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .form-item label {
@@ -1001,10 +1062,69 @@ const doExport = async () => {
   color: #1d2129;
 }
 
-.form-tip {
-  font-size: 12px;
+.option-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.option-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: #f7f8fa;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.option-card:hover {
+  background: #f2f3f5;
+  border-color: #e5e6eb;
+}
+
+.option-card.active {
+  background: rgba(22, 93, 255, 0.06);
+  border-color: #165dff;
+}
+
+.option-card-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.option-card-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.option-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1d2129;
+  margin-bottom: 2px;
+}
+
+.option-card-desc {
+  font-size: 11px;
   color: #86909c;
-  line-height: 1.5;
+}
+
+.option-card-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #165dff;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .export-footer {
