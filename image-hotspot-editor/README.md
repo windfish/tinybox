@@ -6,6 +6,10 @@
 >
 > 属于 [tinybox](https://github.com/windfish/tinybox) 集合中的一个小工具。
 
+## 🌐 在线体验
+
+**[点击在线体验 →](https://windfish.github.io/tinybox/image-hotspot-editor/)**
+
 ## ✨ 功能特性
 
 - **多图管理**：支持添加多张图片，标签页切换，每张图独立热区

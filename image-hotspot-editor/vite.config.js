@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import { fileURLToPath, URL } from 'node:url';
 
 export default defineConfig({
+  base: process.env.NODE_ENV === 'production' ? '/tinybox/image-hotspot-editor/' : '/',
   plugins: [vue()],
   resolve: {
     alias: {
