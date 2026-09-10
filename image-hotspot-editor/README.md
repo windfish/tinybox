@@ -2,6 +2,8 @@
 
 可视化图片热区编辑器，支持多张图片、拖拽热区、四角缩放、一键导出独立 HTML 成品页。
 
+![Demo](../assets/image-hotspot-editor/demo.gif)
+
 > 纯前端工具，无需后端，打开即用。
 >
 > 属于 [tinybox](https://github.com/windfish/tinybox) 集合中的一个小工具。
